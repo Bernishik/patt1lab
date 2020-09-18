@@ -1,11 +1,16 @@
 class GearBoxType:
-    name: str
-    remarks: str
+
+    def __init__(self, name: str, remarks: str):
+        self.name = name
+        self.remarks = remarks
 
 
 class GearBox:
-    gearRatio: float
-    currentGear: int
+
+    def __init__(self, gearRatio: float, currentGear: int,type:GearBoxType):
+        self.gearRatio = gearRatio
+        self.currentGear = currentGear
+        self.type = type
 
     def shiftUp(self):
         pass
@@ -15,33 +20,71 @@ class GearBox:
 
 
 class Tire:
-    width: float
-    airPressure: float
+
+    def __init__(self, width: float, airPressure: float):
+        self.width = width
+        self.airPressure = airPressure
+
 
 
 class Wheel:
-    diameter: float
+
+    def __init__(self, diameter: float):
+        self.diameter = diameter
+        self.Tire = Tire
+
 
 
 class Suspention:
-    springRate: float
+    def __init__(self, springRate: float):
+        self.springRate = springRate
+        self.Wheel = Wheel
+        self.Car = Car
 
 
 class Brake:
-    type: str
+    def __init__(self, type: str):
+        self.type = type
+        self.Wheel = Wheel
+        self.Car = Car
 
     def apply(self):
         pass
 
 
 class CarModel:
-    title: str
+    def __init__(self, title: str):
+        self.title = title
 
+class Engine:
+
+    def __init__(self, capacity: float, numberOfCylinders: int):
+        self.capacity = capacity
+        self.numberOfCylinders = numberOfCylinders
+        self.engine =  Engine
+
+    def start(self):
+        pass
+
+    def brake(self):
+        pass
+
+    def accerate(self):
+        pass
+
+
+class Body:
+    def __init__(self, numberOfDoors: int):
+        self.numberOfDoors = numberOfDoors
+        self.car = Car
 
 class Car:
-    registrationNum: str
-    year: int
-    licenseNum: str
+
+    def __init__(self, registrationNum: str, year: int, licenseNum: str,gearBox:GearBox,suspension:Suspention,brake:Brake,body:Body,engine:Engine):
+        self.registrationNum = registrationNum
+        self.year = year
+        self.licenseNum = licenseNum
+
 
     def moveForward(self):
         pass
@@ -59,47 +102,6 @@ class Car:
         pass
 
 
-class Engine:
-    capacity: float
-    numberOfCylinders: int
-
-    def start(self):
-        pass
-
-    def brake(self):
-        pass
-
-    def accerate(self):
-        pass
 
 
-class Body:
-    numberOfDoors: int
-
-
-car_model = CarModel()
-gear_box_type = GearBoxType()
-gear_box = GearBox()
-gear_box.type = gear_box_type
-
-tire = Tire()
-wheel = Wheel()
-wheel.tire = tire
-
-suspension = Suspention()
-brake = Brake()
-suspension.wheel = wheel
-brake.wheel = wheel
-
-engine = Engine()
-body = Body()
-
-car = Car()
-car.car_model = car_model
-car.gear_box = gear_box
-car.suspension = suspension
-car.brake = brake
-car.body = body
-car.engine = engine
-print(car.year)
 # переробити, всі поля зробити нормальними
